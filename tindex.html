@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>むらっちゼミの中国語東北弁テスト</title>
+<style>
+body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(#ffefc1,#ffd6d6);}
+.header{background:#c00;color:#fff;padding:20px;text-align:center}
+.card{max-width:700px;margin:20px auto;background:#fff;border-radius:16px;padding:20px;box-shadow:0 4px 12px #999}
+.q{font-size:40px;text-align:center;margin:20px}
+button{display:block;width:100%;padding:14px;margin:10px 0;font-size:20px;border:none;border-radius:10px;background:#d33;color:#fff;cursor:pointer}
+button:hover{background:#a00}
+#result{font-size:24px;text-align:center;margin-top:15px}
+.footer{text-align:center;color:#666;margin:20px}
+</style>
+</head>
+<body>
+<div class="header">
+<h1>🎓 むらっちゼミの中国語東北弁テスト 🐼🏮</h1>
+<p>4択クイズ</p>
+</div>
+
+<div class="card">
+<div id="count"></div>
+<div class="q" id="question"></div>
+<div id="choices"></div>
+<div id="result"></div>
+<button onclick="next()">次の問題</button>
+</div>
+
+<div class="footer">© 2026 むらっちゼミ</div>
+
+<script>
+const data=[
+{q:"嘎哈呢？",a:["どこへ行く？","何してる？","眠い","ありがとう"],c:1,j:"何してる？"},
+{q:"唠嗑",a:["おしゃべり","食べる","走る","怒る"],c:0,j:"おしゃべりする"},
+{q:"埋汰",a:["きれい","汚い","速い","寒い"],c:1,j:"汚い・汚す"},
+{q:"整一个",a:["やってみよう","帰ろう","待って","座って"],c:0,j:"ひとつやろう"},
+{q:"老鼻子",a:["少し","たくさん","昨日","簡単"],c:1,j:"ものすごく"},
+{q:"稀罕",a:["好き","嫌い","暑い","眠い"],c:0,j:"好き・気に入る"},
+{q:"磨叽",a:["のろのろ","速い","静か","元気"],c:0,j:"ぐずぐずする"},
+{q:"得劲",a:["気持ちいい","難しい","高い","遠い"],c:0,j:"気持ちいい"},
+{q:"贼好",a:["とても良い","悪い","眠い","高価"],c:0,j:"すごく良い"},
+{q:"咋整",a:["どうしよう","こんにちは","ありがとう","さようなら"],c:0,j:"どうしよう"}
+];
+let i=0,score=0;
+function show(){
+ let d=data[i];
+ document.getElementById("count").innerHTML=`問題 ${i+1}/${data.length}　正解 ${score}`;
+ document.getElementById("question").innerText=d.q;
+ document.getElementById("result").innerHTML="";
+ let c="";
+ d.a.forEach((x,n)=>{c+=`<button onclick="ans(${n})">${n+1}. ${x}</button>`});
+ document.getElementById("choices").innerHTML=c;
+}
+function ans(n){
+ let d=data[i];
+ if(n===d.c){score++;document.getElementById("result").innerHTML="🎉 正解！<br>"+d.j;}
+ else{document.getElementById("result").innerHTML="❌ 不正解<br>正解："+d.a[d.c]+"<br>"+d.j;}
+}
+function next(){i=(i+1)%data.length;show();}
+show();
+</script>
+</body>
+</html>
